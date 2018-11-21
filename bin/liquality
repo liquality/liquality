@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+
+const pkg = require('../package.json')
+const liquality = require('../')
+
+program
+  .version(pkg.version)
+  .option('-s, --skip-latest-check', 'Use the most recent version available on the disk')
+  .option('-d, --do-not-open', 'Do not open the application link in the browser')
+  .option('-p, --port <port>', 'Application port. Default 8080')
+  .parse(process.argv)
+
+liquality(program.skipLatestCheck, program.port, !program.doNotOpen)

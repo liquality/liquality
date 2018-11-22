@@ -2,7 +2,7 @@
   "name": "liquality",
   "version": "0.1.0",
   "description": "A handy tool to quickly get started with Liquality Atomic Swap",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/liquality/liquality.git"

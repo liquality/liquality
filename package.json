@@ -12,6 +12,14 @@
   },
   "homepage": "https://github.com/liquality/liquality#readme",
   "author": "Liquality <info@liquality.io>",
+  "keywords": [
+    "liquality",
+    "swap",
+    "atomic swap",
+    "disintermediated",
+    "bitcoin ethereum swap",
+    "ethereum bitcoin swap"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "standard"

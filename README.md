@@ -22,7 +22,17 @@ Options:
   -s, --skip-latest-check  Use the most recent version available on the disk
   -d, --do-not-open        Do not open the application link in the browser
   -p, --port <port>        Application port. Default 8080
+  --btc-rpc <url>          Bitcoin RPC endpoint. Default http://localhost:18332
+  --btc-rpc-user <user>    Bitcoin RPC user. Default bitcoin
+  --btc-rpc-pass <pass>    Bitcoin RPC pass. Default local321
+  --eth-rpc <url>          Ethereum RPC endpoint. Default http://localhost:8545
   -h, --help               output usage information
+```
+
+## Installation
+
+```
+npm i -g liquality
 ```
 
 

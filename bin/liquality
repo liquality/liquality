@@ -10,6 +10,10 @@ program
   .option('-s, --skip-latest-check', 'Use the most recent version available on the disk')
   .option('-d, --do-not-open', 'Do not open the application link in the browser')
   .option('-p, --port <port>', 'Application port. Default 8080')
+  .option('--btc-rpc <url>', 'Bitcoin RPC endpoint. Default http://localhost:18332')
+  .option('--btc-rpc-user <user>', 'Bitcoin RPC user. Default bitcoin')
+  .option('--btc-rpc-pass <pass>', 'Bitcoin RPC pass. Default local321')
+  .option('--eth-rpc <url>', 'Ethereum RPC endpoint. Default http://localhost:8545')
   .parse(process.argv)
 
-liquality(program.skipLatestCheck, program.port, !program.doNotOpen)
+liquality(program.skipLatestCheck, program.port, !program.doNotOpen, program)

@@ -30,7 +30,12 @@ mkdirp.sync(ASSET_DIR)
 const request = require('request-promise')
 const app = express()
 
-module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = true) => {
+module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = true, config = {
+  btcRpc: false,
+  btcRpcUser: false,
+  btcRpcPass: false,
+  ethRpc: false
+}) => {
   if (!skipLatestCheck) {
     const { object: { sha } } = await request({
       url: `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/git/refs/heads/${GITHUB_BRANCH}`,
@@ -66,6 +71,22 @@ module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = tr
     fs.writeFileSync(HTTPS_KEY_PATH, keys.serviceKey, 'utf-8')
     fs.writeFileSync(HTTPS_CERT_PATH, keys.certificate, 'utf-8')
   }
+
+  const configContent = []
+
+  if (config.btcRpc) configContent.push(`window.btcRpc = '${config.btcRpc}'`)
+  if (config.btcRpcUser) configContent.push(`window.btcRpcUser = '${config.btcRpcUser}'`)
+  if (config.btcRpcPass) configContent.push(`window.btcRpcPass = '${config.btcRpcPass}'`)
+  if (config.ethRpc) configContent.push(`window.ethRpc = '${config.ethRpc}'`)
+
+  const indexHtmlPath = path.join(LATEST_ASSET_DIR, 'index.html')
+  const indexHtmlContent = fs
+    .readFileSync(indexHtmlPath, 'utf-8')
+    .replace('<meta charset="utf-8">', '<meta charset="utf-8"><script>' + configContent.join(';') + '</script>')
+
+  app.get('/', (req, res) => {
+    res.send(indexHtmlContent)
+  })
 
   app.use('/', express.static(LATEST_ASSET_DIR))
 

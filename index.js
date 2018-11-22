@@ -30,7 +30,7 @@ mkdirp.sync(ASSET_DIR)
 const request = require('request-promise')
 const app = express()
 
-module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = true, config = {
+module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = true, useHttp = false, config = {
   btcRpc: false,
   btcRpcUser: false,
   btcRpcPass: false,
@@ -90,9 +90,14 @@ module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = tr
 
   app.use('/', express.static(LATEST_ASSET_DIR))
 
-  const url = `https://localhost:${port}`
+  const url = `http${!useHttp ? 's' : ''}://localhost:${port}`
   console.log(`Serving Liquality Atomic Swap on ${url}`)
-  https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app).listen(port)
+
+  if (useHttp) {
+    app.listen(port)
+  } else {
+    https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app).listen(port)
+  }
 
   if (openInBrowser) {
     opn(url)

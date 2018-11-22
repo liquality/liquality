@@ -36,6 +36,11 @@ npm i -g liquality
 ```
 
 
+## Deploy Your Own Liquality Instance
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
 ## License
 
 [MIT](./LICENSE.md)

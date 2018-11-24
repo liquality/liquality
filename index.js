@@ -72,7 +72,9 @@ module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = tr
     fs.writeFileSync(HTTPS_CERT_PATH, keys.certificate, 'utf-8')
   }
 
-  const configContent = []
+  const configContent = [
+    `window.appSubPath = '/'`
+  ]
 
   if (config.btcRpc) configContent.push(`window.btcRpc = '${config.btcRpc}'`)
   if (config.btcRpcUser) configContent.push(`window.btcRpcUser = '${config.btcRpcUser}'`)

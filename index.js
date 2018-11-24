@@ -5,6 +5,8 @@ const https = require('https')
 
 const mkdirp = require('mkdirp')
 const express = require('express')
+const helmet = require('helmet')
+const compress = require('compression')
 const symlinkDir = require('symlink-dir')
 const opn = require('opn')
 
@@ -29,6 +31,9 @@ mkdirp.sync(ASSET_DIR)
 
 const request = require('request-promise')
 const app = express()
+
+app.use(helmet())
+app.use(compress())
 
 module.exports = async (skipLatestCheck = false, port = 8080, openInBrowser = true, useHttp = false, config = {
   btcRpc: false,
